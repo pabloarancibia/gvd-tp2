@@ -12,7 +12,7 @@ Para desarrollar el tp se utilizó la herramienta:
 
 ## MODELO 
 
-![](img/model.png)
+![](img/modelo.png)
 
 
 ## NODOS:  
