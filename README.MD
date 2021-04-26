@@ -20,8 +20,12 @@ Para desarrollar el tp se utilizó la herramienta:
 **MATERIA**: Nombre de la materia y tipo para asignarle el atributo Electiva, Obligatoria, etc.  
   
 **PERSONA**: Se determina el uso de este nodo para representar a una persona que puede ser tanto Alumno, Docente o el rol que en un futuro se necesite asignar. De esta manera se hace escalable el uso de roles.  
+Los atributos son: apellido, nombre, email, fechanac y pais.  
 
-**ROL**: Como se mencionaba,  a travez de este nodo se asigna el/los roles que correspondan a cada Persona.    
+**ROL**: Como se mencionaba,  a travez de este nodo se asigna el/los roles que correspondan a cada Persona. 
+Atributo: nombre.   
+
+> Tanto Nodos como Relaciones, todos tienen el campo id.
   
 ## RELACIONES
 
