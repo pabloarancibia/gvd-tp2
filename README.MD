@@ -15,18 +15,25 @@ Para desarrollar el tp se utilizó la herramienta:
 ![](img/model.png)
 
 
-#### NODOS:  
+## NODOS:  
 
 **MATERIA**: Nombre de la materia y tipo para asignarle el atributo Electiva, Obligatoria, etc.  
-**PERSONA**: Se determina el uso de este nodo para representar a una persona que puede ser tanto Alumno, Docente o el rol que en un futuro se necesite asignar.  
-**ROL**: Como se mencionaba,  a travez de este nodo se asigna el/los rol que correspondan. De esta manera el sistema es escalable y se puede tener una Persona con varios Roles.  
+  
+**PERSONA**: Se determina el uso de este nodo para representar a una persona que puede ser tanto Alumno, Docente o el rol que en un futuro se necesite asignar. De esta manera se hace escalable el uso de roles.  
 
-#### RELACIONES
-**CONOCE**:  Relacion entre personas.
+**ROL**: Como se mencionaba,  a travez de este nodo se asigna el/los roles que correspondan a cada Persona.    
+  
+## RELACIONES
+
+**CONOCE**:  Relacion entre personas.  
+
 **CURSARON**: Para alumnos que cursaron una Materia, se asignan atributos año, calificación, curso, grupo y cuatrimestre.  
+  
 **DICTARON**: Para docentes que dictaron una materia específica, se determina el año, cuatrimestre y curso.  
+  
 **ESROL**: Para asignar uno o varios roles a una Persona.
 
+  
 ## ARCHIVOS
 
 Encontrarán en archivos: [queries.cypher](/files/queries.cypher) los scripts para crear y cargar datos a la base de datos.    
