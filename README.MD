@@ -2,7 +2,7 @@
 
 * PABLO ARANCIBIA  
 
-2021
+* 2021
 
 ## TECNOLOGÍA
 Neo4j: es un software libre de Base de datos orientada a grafos, implementado en Java.​​  
@@ -11,6 +11,9 @@ Para desarrollar el tp se utilizó la herramienta:
 [Neo4j Sandbox](https://sandbox.neo4j.com/)
 
 ## MODELO 
+
+![](img/model.png)
+
 
 #### NODOS:  
 
@@ -26,12 +29,12 @@ Para desarrollar el tp se utilizó la herramienta:
 
 ## ARCHIVOS
 
-encontrarán en archivos: [queries.cypher](/files/queries) los scripts para crear y cargar datos a la base de datos.    
-el archivo: [queries-resultados.cypher](/files/queries-resultados) para la resolución de items del TP.
+Encontrarán en archivos: [queries.cypher](/files/queries.cypher) los scripts para crear y cargar datos a la base de datos.    
+
 
 ## GRÁFICA DE NODOS Y RELACIONES.
 
-
+![](img/BD-completa.png)
 
 ## CONSULTAS
 **Importante: En algunas consultas se modificó el RETURN para poder obtener el graph imágen. Si desea reproducirlo, sólo debe quitar los atributos de los nodos en RETURN. Ejemplo: en vez de Pa.apellido poner sólamente Pa.**
@@ -43,7 +46,7 @@ MATCH (Pa:Persona)-[RA:CURSARON]->(M:Materia)<-[RB:CURSARON]-(Pb:Persona)
 WHERE RA.grupo <> RB.grupo
 RETURN DISTINCT Pa.apellido, Pb.apellido, M.nombre;
 ```
-
+```
 ╒═════════════╤═════════════╤════════════╕
 │"Pa.apellido"│"Pb.apellido"│"M.nombre"  │
 ╞═════════════╪═════════════╪════════════╡
@@ -63,6 +66,7 @@ RETURN DISTINCT Pa.apellido, Pb.apellido, M.nombre;
 ├─────────────┼─────────────┼────────────┤
 │"Ferreira"   │"Díaz"       │"Big Data"  │
 └─────────────┴─────────────┴────────────┘
+```
 
 ![](img/1.png)
 
@@ -74,7 +78,7 @@ WITH D, count(R) AS Cantidad
 WHERE Cantidad > 1
 RETURN D.apellido as Apellido, D.nombre as Nombre;
 ```
-
+```
 ╒═══════════╤═════════╕
 │"Apellido" │"Nombre" │
 ╞═══════════╪═════════╡
@@ -82,7 +86,7 @@ RETURN D.apellido as Apellido, D.nombre as Nombre;
 ├───────────┼─────────┤
 │"Arancibia"│"Pablo"  │
 └───────────┴─────────┘
-
+```
 ![](img/2.png)
 
 3. Tu propio promedio de calificaciones
@@ -90,12 +94,13 @@ RETURN D.apellido as Apellido, D.nombre as Nombre;
 MATCH (A:Persona {apellido: "Arancibia"})-[R:CURSARON]->(M:Materia)
 RETURN A. apellido as Apellido, A.nombre as Nombre, avg(R.calificación) as Promedio
 ```
-
+```
 ╒═══════════╤════════╤═════════════════╕
 │"Apellido" │"Nombre"│"Promedio"       │
 ╞═══════════╪════════╪═════════════════╡
 │"Arancibia"│"Pablo" │9.333333333333334│
 └───────────┴────────┴─────────────────┘
+```
 
 ![](img/3.png)
 
@@ -108,6 +113,8 @@ WHERE RA.curso = RB.curso and RA.cuatrimestre = RB.cuatrimestre
 and not (Pa)-[:CONOCE]-(Pb)
 and not (Pb)-[:CONOCE]-(Pa)
 RETURN DISTINCT Pa.apellido as Apellido, Pb.apellido as Nombre, M.nombre as Materia
+```
+
 ```
 ╒═══════════╤═══════════╤════════════╕
 │"Apellido" │"Nombre"   │"Materia"   │
@@ -124,6 +131,7 @@ RETURN DISTINCT Pa.apellido as Apellido, Pb.apellido as Nombre, M.nombre as Mate
 ├───────────┼───────────┼────────────┤
 │"Ferreira" │"Corrado"  │"Big Data"  │
 └───────────┴───────────┴────────────┘
+```
 
 > Tener en cuenta el cuadro para ver las relaciones.
 
@@ -148,6 +156,7 @@ AND EXISTS ((P:Persona)-[:ESROL]->(:Rol {nombre:"alumno"}))
 RETURN P.apellido as Apellido, P.nombre as Nombre;
 ```
 
+```
 ╒═══════════╤═════════╕
 │"Apellido" │"Nombre" │
 ╞═══════════╪═════════╡
@@ -157,6 +166,7 @@ RETURN P.apellido as Apellido, P.nombre as Nombre;
 ├───────────┼─────────┤
 │"Ferreira" │"Natalia"│
 └───────────┴─────────┘
+```
 
 ![](img/6.png)
 
@@ -168,7 +178,7 @@ WHERE EXISTS ((P:Persona)-[:CURSARON]->(:Materia))
 AND EXISTS ((P:Persona)-[:DICTARON]->(:Materia))
 RETURN P.apellido as Apellido, P.nombre as Nombre;
 ```
-
+```
 ╒═══════════╤═════════╕
 │"Apellido" │"Nombre" │
 ╞═══════════╪═════════╡
@@ -178,7 +188,7 @@ RETURN P.apellido as Apellido, P.nombre as Nombre;
 ├───────────┼─────────┤
 │"Ferreira" │"Natalia"│
 └───────────┴─────────┘
-
+```
 ![](img/6.png)
 
 7. Dado un alumno en particular, se quiere obtener el listado de materias electivas que no
@@ -191,13 +201,13 @@ WHERE not EXISTS ((Pa: Persona {apellido: "Raul"})-[:CURSARON]->(Ma:Materia {tip
 and EXISTS ((Pb: Persona)-[:CURSARON]->(Ma:Materia {tipo:"Electiva"}))
 RETURN Ma as Materia
 ```
-
+```
 ╒═════════════════════════════════════════╕
 │"Materia"                                │
 ╞═════════════════════════════════════════╡
 │{"nombre":"Blockchain","tipo":"Electiva"}│
 └─────────────────────────────────────────┘
-
+```
 ![](img/7.png)
 
 8. Hacer una variante del ítem anterior, recomendando sólo si el otro alumno es un contacto
@@ -210,13 +220,13 @@ and EXISTS ((Pb: Persona)-[:CURSARON]->(Ma:Materia {tipo:"Electiva"}))
 AND EXISTS ((Pa:Persona)-[:CONOCE*..]-(Pb:Persona))
 RETURN Ma as Materia
 ```
-
+```
 ╒═════════════════════════════════════════╕
 │"Materia"                                │
 ╞═════════════════════════════════════════╡
 │{"nombre":"Blockchain","tipo":"Electiva"}│
 └─────────────────────────────────────────┘
-
+```
 ![](img/7.png)
 
 9. Consulta adicional, decidida por el alumno.
@@ -229,7 +239,7 @@ WHERE not EXISTS ((Pa: Persona)-[:CURSARON]->(Mb:Materia))
 and EXISTS ((Pb:Persona)-[:CURSARON]->(Mb:Materia))
 RETURN Pa.apellido as Dicto , Mb as Materia, Pb.apellido as DocenteSiCurso
 ```
-
+```
 ╒═══════════╤══════════════════════════════════════════╤════════════════╕
 │"Dicto"    │"Materia"                                 │"DocenteSiCurso"│
 ╞═══════════╪══════════════════════════════════════════╪════════════════╡
@@ -241,5 +251,5 @@ RETURN Pa.apellido as Dicto , Mb as Materia, Pb.apellido as DocenteSiCurso
 ├───────────┼──────────────────────────────────────────┼────────────────┤
 │"Arancibia"│{"nombre":"Big Data","tipo":"obligatoria"}│"Ferreira"      │
 └───────────┴──────────────────────────────────────────┴────────────────┘
-
+```
 ![](img/9.png)
